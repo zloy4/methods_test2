@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тренажер БПФ - Алгоритм Кули-Тьюки</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Умножение чисел 8345129670 и 2953184761 через БПФ</h1>
+        <p>Впишите значения в пустые поля и нажмите "Проверить" после каждого блока.</p>
+
+        <!-- Блок 1 -->
+        <div id="block-1" class="block">
+            <h2>Блок 1. Подготовка данных</h2>
+            <div class="row">1.1. a[0]=<input data-ans="0">, a[1]=<input data-ans="7">, a[2]=<input data-ans="6">, a[3]=<input data-ans="9">, a[4]=<input data-ans="2">, a[5]=<input data-ans="1">, a[6]=<input data-ans="5">, a[7]=<input data-ans="4">, a[8]=<input data-ans="3">, a[9]=<input data-ans="8"></div>
+            <div class="row">1.2. b[0]=<input data-ans="1">, b[1]=<input data-ans="6">, b[2]=<input data-ans="7">, b[3]=<input data-ans="4">, b[4]=<input data-ans="8">, b[5]=<input data-ans="1">, b[6]=<input data-ans="3">, b[7]=<input data-ans="5">, b[8]=<input data-ans="9">, b[9]=<input data-ans="2"></div>
+            <div class="row">1.3. Сумма lenA + lenB = <input data-ans="20">. Массивы дополняются нулями до длины n = <input data-ans="32">. Нулей дописано в A: <input data-ans="22">, в B: <input data-ans="22"></div>
+            <button onclick="checkBlock('block-1')">Проверить Блок 1</button>
+        </div>
+
+        <!-- Блок 2 -->
+        <div id="block-2" class="block">
+            <h2>Блок 2. Прямое БПФ числа A – вызов fft(a, 32, 0)</h2>
+            <div class="row">2.1. even[0]=<input data-ans="0">, even[1]=<input data-ans="6">, even[2]=<input data-ans="2">, even[3]=<input data-ans="5">, even[4]=<input data-ans="3">, even[5]=<input data-ans="0"></div>
+            <div class="row">2.2. odd[0]=<input data-ans="7">, odd[1]=<input data-ans="9">, odd[2]=<input data-ans="1">, odd[3]=<input data-ans="4">, odd[4]=<input data-ans="8">, odd[5]=<input data-ans="0"></div>
+            <button onclick="checkBlock('block-2')">Проверить Блок 2</button>
+        </div>
+
+        <!-- Блок 3 -->
+        <div id="block-3" class="block">
+            <h2>Блок 3. Второй уровень рекурсии для числа A (n=16)</h2>
+            <div class="row">3.1. even[0]=<input data-ans="0">, even[1]=<input data-ans="2">, even[2]=<input data-ans="3">, odd[0]=<input data-ans="6">, odd[1]=<input data-ans="5">, odd[2]=<input data-ans="0"></div>
+            <div class="row">3.2. even[0]=<input data-ans="7">, even[1]=<input data-ans="1">, even[2]=<input data-ans="8">, odd[0]=<input data-ans="9">, odd[1]=<input data-ans="4">, odd[2]=<input data-ans="0"></div>
+            <div class="row">3.3. Всего вызовов fft(..., 16, 0) для числа A: <input data-ans="2"></div>
+            <button onclick="checkBlock('block-3')">Проверить Блок 3</button>
+        </div>
+
+        <!-- Блок 4 -->
+        <div id="block-4" class="block">
+            <h2>Блок 4. Третий уровень рекурсии для числа A (n=8)</h2>
+            <div class="row">4.1. even[0]=<input data-ans="0">, even[1]=<input data-ans="3">, odd[0]=<input data-ans="2">, odd[1]=<input data-ans="0"></div>
+            <div class="row">4.2. even[0]=<input data-ans="6">, even[1]=<input data-ans="0">, odd[0]=<input data-ans="5">, odd[1]=<input data-ans="0"></div>
+            <div class="row">4.3. even[0]=<input data-ans="7">, even[1]=<input data-ans="8">, odd[0]=<input data-ans="1">, odd[1]=<input data-ans="0"></div>
+            <div class="row">4.4. even[0]=<input data-ans="9">, even[1]=<input data-ans="0">, odd[0]=<input data-ans="4">, odd[1]=<input data-ans="0"></div>
+            <div class="row">4.5. Всего вызовов fft(..., 8, 0) для числа A: <input data-ans="4"></div>
+            <button onclick="checkBlock('block-4')">Проверить Блок 4</button>
+        </div>
+
+        <!-- Блок 5 -->
+        <div id="block-5" class="block">
+            <h2>Блок 5. Четвёртый уровень рекурсии для числа A (n=4)</h2>
+            <div class="row">5.1. even[0]=<input data-ans="0">, even[1]=<input data-ans="0">, odd[0]=<input data-ans="3">, odd[1]=<input data-ans="0"></div>
+            <div class="row">5.2. even[0]=<input data-ans="2">, even[1]=<input data-ans="0">, odd[0]=<input data-ans="0">, odd[1]=<input data-ans="0"></div>
+            <div class="row">5.3. even[0]=<input data-ans="6">, even[1]=<input data-ans="0">, odd[0]=<input data-ans="0">, odd[1]=<input data-ans="0"></div>
+            <div class="row">5.4. even[0]=<input data-ans="5">, even[1]=<input data-ans="0">, odd[0]=<input data-ans="0">, odd[1]=<input data-ans="0"></div>
+            <div class="row">5.5. even[0]=<input data-ans="7">, even[1]=<input data-ans="0">, odd[0]=<input data-ans="8">, odd[1]=<input data-ans="0"></div>
+            <div class="row">5.6. even[0]=<input data-ans="1">, even[1]=<input data-ans="0">, odd[0]=<input data-ans="0">, odd[1]=<input data-ans="0"></div>
+            <div class="row">5.7. even[0]=<input data-ans="9">, even[1]=<input data-ans="0">, odd[0]=<input data-ans="0">, odd[1]=<input data-ans="0"></div>
+            <div class="row">5.8. even[0]=<input data-ans="4">, even[1]=<input data-ans="0">, odd[0]=<input data-ans="0">, odd[1]=<input data-ans="0"></div>
+            <div class="row">5.9. Всего вызовов fft(..., 4, 0) для числа A: <input data-ans="8"></div>
+            <button onclick="checkBlock('block-5')">Проверить Блок 5</button>
+        </div>
+
+        <!-- Блок 6 -->
+        <div id="block-6" class="block">
+            <h2>Блок 6. Пятый уровень рекурсии для числа A (n=2)</h2>
+            <div class="row">6.1. even[0]=<input data-ans="0">, odd[0]=<input data-ans="0"></div>
+            <div class="row">6.2. even[0]=<input data-ans="3">, odd[0]=<input data-ans="0"></div>
+            <div class="row">6.3. even[0]=<input data-ans="7">, odd[0]=<input data-ans="0"></div>
+            <div class="row">6.4. even[0]=<input data-ans="8">, odd[0]=<input data-ans="0"></div>
+            <div class="row">6.5. Всего вызовов fft(..., 2, 0) для числа A: <input data-ans="16"></div>
+            <button onclick="checkBlock('block-6')">Проверить Блок 6</button>
+        </div>
+
+        <!-- Блок 7 -->
+        <div id="block-7" class="block">
+            <h2>Блок 7. Базовый случай и статистика</h2>
+            <div class="row">7.1. Базовый случай при n = <input data-ans="1">. Всего вызовов fft(..., 1, 0) для A: <input data-ans="32"></div>
+            <div class="row">7.2. Глубина рекурсии: <input data-ans="5">. Общее кол-во вызовов для прямого преобразования A: <input data-ans="63"></div>
+            <div class="row">7.3. Строка fft(even...) выполнится <input data-ans="31"> раз. Строка fft(odd...) — <input data-ans="31"> раз.</div>
+            <button onclick="checkBlock('block-7')">Проверить Блок 7</button>
+        </div>
+
+        <!-- Блок 8 -->
+        <div id="block-8" class="block">
+            <h2>Блок 8. Прямое БПФ числа B</h2>
+            <div class="row">8.1. even[0]=<input data-ans="1">, even[1]=<input data-ans="7">, even[2]=<input data-ans="8">, even[3]=<input data-ans="3">, even[4]=<input data-ans="9">, odd[0]=<input data-ans="6">, odd[1]=<input data-ans="4">, odd[2]=<input data-ans="1">, odd[3]=<input data-ans="5">, odd[4]=<input data-ans="2"></div>
+            <div class="row">8.2. even[0]=<input data-ans="1">, even[1]=<input data-ans="8">, even[2]=<input data-ans="9">, odd[0]=<input data-ans="7">, odd[1]=<input data-ans="3"></div>
+            <div class="row">8.3. Общее количество вызовов fft для прямого преобразования B: <input data-ans="63"></div>
+            <button onclick="checkBlock('block-8')">Проверить Блок 8</button>
+        </div>
+
+        <!-- Блок 9 -->
+        <div id="block-9" class="block">
+            <h2>Блок 9. Поэлементное умножение спектров</h2>
+            <div class="row">9.1. Количество поэлементных умножений комплексных чисел: <input data-ans="32"></div>
+            <button onclick="checkBlock('block-9')">Проверить Блок 9</button>
+        </div>
+
+        <!-- Блок 10 -->
+        <div id="block-10" class="block">
+            <h2>Блок 10. Обратное БПФ</h2>
+            <div class="row">10.1. Параметр inv: <input data-ans="1">. Коэффициент при 2π/n: <input data-ans="-1"></div>
+            <div class="row">10.2. Общее количество вызовов fft: <input data-ans="63">. Значения делятся на n = <input data-ans="32"></div>
+            <button onclick="checkBlock('block-10')">Проверить Блок 10</button>
+        </div>
+
+        <!-- Блок 11 -->
+        <div id="block-11" class="block">
+            <h2>Блок 11. Нормализация и результат</h2>
+            <div class="row">11.1. Цифра вычисляется как val % <input data-ans="10">. Перенос как val / <input data-ans="10"></div>
+            <button onclick="checkBlock('block-11')">Проверить Блок 11</button>
+        </div>
+
+        <!-- Блок 12 -->
+        <div id="block-12" class="block">
+            <h2>Блок 12. Итоговая статистика</h2>
+            <div class="row">12.1. Суммарное количество вызовов fft за всё время: <input data-ans="189"></div>
+            <div class="row">12.2. Суммарное количество сложений/вычитаний в «бабочках»: <input data-ans="480"></div>
+            <button onclick="checkBlock('block-12')">Проверить Блок 12</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
